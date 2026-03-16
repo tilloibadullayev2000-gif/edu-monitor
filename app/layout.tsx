@@ -1,6 +1,6 @@
 import "./globals.css";
-import Sidebar from "@/components/Sidebar";
 import AuthGuard from "@/components/AuthGuard";
+import SidebarWrapper from "@/components/SidebarWrapper";
 
 export const metadata = {
   title: "Edu Monitor",
@@ -30,12 +30,4 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       <main className="flex-1">{children}</main>
     </div>
   );
-}
-
-function SidebarWrapper() {
-  if (typeof window !== "undefined" && window.location.pathname === "/login") {
-    return null;
-  }
-
-  return <Sidebar />;
 }
