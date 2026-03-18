@@ -16,14 +16,17 @@ export async function GET() {
 
     const data = await response.json();
 
-    return NextResponse.json({
-      ok: response.ok,
-      status: response.status,
-      data,
-    });
-  } catch (error: any) {
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: data.error || "Back4App xatoligi" },
+        { status: response.status }
+      );
+    }
+
+    return NextResponse.json({ results: data.results || [] });
+  } catch {
     return NextResponse.json(
-      { error: error?.message || "Server xatoligi" },
+      { error: "Server xatoligi" },
       { status: 500 }
     );
   }
@@ -55,14 +58,17 @@ export async function POST(req: Request) {
 
     const data = await response.json();
 
-    return NextResponse.json({
-      ok: response.ok,
-      status: response.status,
-      data,
-    });
-  } catch (error: any) {
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: data.error || "Back4App xatoligi" },
+        { status: response.status }
+      );
+    }
+
+    return NextResponse.json({ success: true, data });
+  } catch {
     return NextResponse.json(
-      { error: error?.message || "Server xatoligi" },
+      { error: "Server xatoligi" },
       { status: 500 }
     );
   }
